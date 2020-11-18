@@ -67,3 +67,9 @@ func RemoveStudent(stuno int64) (int64, error) {
 		return 0, err
 	}
 }
+
+func (s *StudentModel) GetRoommate() *[]StudentModel {
+	var roommates []StudentModel
+	db.StudentDB.Where("building=? AND room=?", s.Building, s.Room).Find(&roommates)
+	return &roommates
+}

@@ -124,3 +124,26 @@ func RemoveStudentHandler(c *gin.Context) {
 		"errors": errorList,
 	})
 }
+
+func GetRoommateHandler(c *gin.Context) {
+	stuno, _ := strconv.ParseInt(c.Param("stuno"), 10, 64)
+	student, err := GetStudent(stuno)
+	var msg string
+	var errorList string
+	errorCount := 0
+	var roommates *[]StudentModel
+	if err == nil {
+		roommates = student.GetRoommate()
+	} else {
+		msg = "failed"
+		errorList += err.Error() + "\n"
+		errorCount++
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"msg":    msg,
+		"data":   roommates,
+		"error":  errorCount,
+		"errors": errorList,
+	})
+}

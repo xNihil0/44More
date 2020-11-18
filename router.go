@@ -14,6 +14,7 @@ func initRouter() *gin.Engine {
 		student.GET("/info/:stuno", GetStudentHandler)
 		student.PUT("/update", UpdateStudentHandler)
 		student.DELETE("/remove/:stuno", RemoveStudentHandler)
+		student.GET("/roommate/:stuno", GetRoommateHandler)
 	}
 
 	return router
